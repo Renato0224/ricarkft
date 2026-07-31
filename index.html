@@ -184,7 +184,6 @@
         async function loadCars() {
             const container = document.getElementById('car-list');
             try {
-                // Lekérjük a GitHub mappában lévő fájlok listáját
                 const response = await fetch('https://api.github.com/repos/Renato0224/ricarkft/contents/_autok');
                 const files = await response.json();
 
@@ -193,25 +192,34 @@
                     return;
                 }
 
-                container.innerHTML = ''; // Töröljük a "betöltés" szöveget
+                container.innerHTML = '';
 
                 for (let file of files) {
                     if (file.name.endsWith('.md')) {
                         const fileRes = await fetch(file.download_url);
                         const text = await fileRes.text();
 
-                        // Kinyerjük a Markdown előlévő Frontmatter (YAML) adatokat
                         const parts = text.split('---');
                         if (parts.length >= 2) {
                             const data = jsyaml.load(parts[1]);
 
-                            // HTML kártya generálása az adatokból
+                            // Képmező keresése (akár image, akár kep néven mentette az admin)
+                            let rawImg = data.image || data.kep || '';
+                            if (rawImg.startsWith('/')) {
+                                rawImg = rawImg.substring(1);
+                            }
+                            // Ha nem tartalmazza az images/ mappát, de van neve, akkor hozzátesszük
+                            let imgPath = rawImg;
+                            if (rawImg && !rawImg.startsWith('images/') && !rawImg.startsWith('http')) {
+                                imgPath = 'images/' + rawImg;
+                            }
+
                             const carHTML = `
                                 <div class="car-card">
-                                    <img src="${data.kep || 'https://via.placeholder.com/600x300/161616/d4af37?text=Nincs+kep'}" alt="${data.cim || 'Autó'}">
-                                    <h3>${data.cim || 'Ismeretlen autó'}</h3>
+                                    <img src="${imgPath || 'https://via.placeholder.com/600x300/161616/d4af37?text=Nincs+kep'}" alt="${data.title || data.cim || 'Autó'}">
+                                    <h3>${data.title || data.cim || 'Ismeretlen autó'}</h3>
                                     <p>Évjárat: ${data.evjarat || '-'} | Üzemanyag: ${data.uzemanyag || '-'} | Váltó: ${data.valto || '-'}</p>
-                                    <p><strong>Ár: ${data.ar || 'Megállapodás szerint'}</strong></p>
+                                    <p><strong>Ár: ${data.ar || 'Megállapodás szerint'} Ft</strong></p>
                                     <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
                                 </div>
                             `;
