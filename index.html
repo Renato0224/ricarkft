@@ -160,8 +160,14 @@
         <!-- Kínálat -->
         <div class="card">
             <h2>Kiemelt Ajánlataink</h2>
-            <div class="car-grid" id="car-list">
-                <!-- Ide tölti be az autókat a szkript -->
+            <div class="car-grid">
+                <div class="car-card">
+                    <img src="images/20260726_104409.jpg" alt="Audi Q7">
+                    <h3>Audi Q7</h3>
+                    <p>Évjárat: 2007 | Üzemanyag: Dízel | Váltó: Automata</p>
+                    <p><strong>Ár: 4 990 000 Ft</strong></p>
+                    <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
+                </div>
             </div>
         </div>
 
@@ -176,61 +182,6 @@
             &copy; 2026 RICAR KFT - Minden jog fenntartva.
         </footer>
     </div>
-
-    <!-- Autó betöltő közvetlen fájlból -->
-    <script>
-        async function loadCarDirectly() {
-            const container = document.getElementById('car-list');
-            try {
-                // Közvetlenül betöltjük a _autok mappából a 2026-audi-q7.md fájlt
-                const response = await fetch('_autok/2026-audi-q7.md');
-                const text = await response.text();
-
-                const parts = text.split('---');
-                if (parts.length >= 2) {
-                    const lines = parts[1].split('\n');
-                    let car = {};
-                    
-                    lines.forEach(line => {
-                        let colonIndex = line.indexOf(':');
-                        if (colonIndex !== -1) {
-                            let key = line.substring(0, colonIndex).trim();
-                            let val = line.substring(colonIndex + 1).trim().replace(/['"]/g, '');
-                            car[key] = val;
-                        }
-                    });
-
-                    let imgPath = car.image || car.kep || 'images/20260726_104409.jpg';
-                    if (imgPath.startsWith('/')) imgPath = imgPath.substring(1);
-                    if (!imgPath.startsWith('images/') && !imgPath.startsWith('http')) {
-                        imgPath = 'images/' + imgPath;
-                    }
-
-                    container.innerHTML = `
-                        <div class="car-card">
-                            <img src="${imgPath}" alt="${car.title || car.cim || 'Audi Q7'}">
-                            <h3>${car.title || car.cim || 'Audi Q7'}</h3>
-                            <p>Évjárat: ${car.evjarat || '2007'} | Üzemanyag: ${car.uzemanyag || 'Dízel'} | Váltó: ${car.valto || 'Automata'}</p>
-                            <p><strong>Ár: ${car.ar || '4 990 000'} Ft</strong></p>
-                            <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
-                        </div>
-                    `;
-                }
-            } catch (e) {
-                container.innerHTML = `
-                    <div class="car-card">
-                        <img src="images/20260726_104409.jpg" alt="Audi Q7">
-                        <h3>Audi Q7</h3>
-                        <p>Évjárat: 2007 | Üzemanyag: Dízel | Váltó: Automata</p>
-                        <p><strong>Ár: 4 990 000 Ft</strong></p>
-                        <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
-                    </div>
-                `;
-            }
-        }
-
-        loadCarDirectly();
-    </script>
 
     <!-- Script a bejelentkezéshez -->
     <script>
