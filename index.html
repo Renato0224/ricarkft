@@ -1,176 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RICAR KFT - Használtautó Kereskedés</title>
-    <style>
-        :root {
-            --bg-color: #0b0b0b;
-            --card-bg: #161616;
-            --gold: #d4af37;
-            --gold-hover: #f3e5ab;
-            --text-light: #e0e0e0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-light);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            max-width: 800px;
-            width: 100%;
-        }
-
-        header {
-            text-align: center;
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            color: var(--gold);
-            margin: 0;
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .subtitle {
-            color: #aaa;
-            margin-top: 5px;
-            font-size: 1rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--gold);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
-        }
-
-        .card h2 {
-            color: var(--gold);
-            margin-top: 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 10px;
-        }
-
-        .about-img {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--gold);
-            margin-top: 15px;
-        }
-
-        .car-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .car-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--gold);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--gold);
-            color: #000;
-            padding: 10px 20px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background-color: var(--gold-hover);
-        }
-
-        .phone-link {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .phone-link:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #777;
-            font-size: 0.9rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RICAR KFT - Használtautó Kereskedés</title>
+  
+  <!-- Netlify Identity (A bejelentkezéshez kell) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f6f9; color: #333; }
+    header { background: #1a252f; color: white; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.8rem; font-weight: bold; color: #e74c3c; }
+    .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 4rem 1rem; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+    .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card-body { padding: 1.5rem; }
+    .card-title { font-size: 1.3rem; margin-bottom: 0.5rem; color: #2c3e50; }
+    .price { font-size: 1.4rem; font-weight: bold; color: #e74c3c; margin-top: 1rem; }
+    .details { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    footer { background: #1a252f; color: white; text-align: center; padding: 1.5rem; margin-top: 3rem; }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>RICAR KFT</h1>
-            <div class="subtitle">Minőségi Használtautó Kereskedés</div>
-        </header>
+  <header>
+    <div class="logo">RICAR KFT</div>
+    <div>Megbízható használtautók</div>
+  </header>
 
-        <!-- Bemutatkozás -->
-        <div class="card">
-            <h2>Rólunk</h2>
-            <p>Üdvözöljük a RICAR KFT oldalán! Megbízható, átvizsgált használtautók széles választékával várjuk ügyfeleinket. Célunk, hogy megtaláljuk az Ön számára a legmegfelelőbb gépjárművet.</p>
-            
-            <!-- ITT VAN A FRISSÍTETT SAJÁT KÉPED: -->
-            <img src="Rolunk.png" alt="RICAR KFT Telephely" class="about-img">
+  <section class="hero">
+    <h1>Találd meg a neked való autót!</h1>
+    <p>Minőségi kínálat, átvizsgált gépjárművek.</p>
+  </section>
+
+  <div class="container">
+    <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Kínálatunk</h2>
+    <div class="grid">
+      
+      <!-- Minta autó -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Autó">
+        <div class="card-body">
+          <div class="card-title">BMW 320d Touring</div>
+          <div class="details">Évjárat: 2018 | Dízel | Automata</div>
+          <div class="price">5 890 000 Ft</div>
         </div>
+      </div>
 
-        <!-- Kínálat / Feltöltött autók -->
-        <div class="card">
-            <h2>Kiemelt Ajánlataink</h2>
-            <div class="car-grid">
-                <div class="car-card">
-                    <img src="https://via.placeholder.com/600x300/161616/d4af37?text=Autó+Kép+Helye" alt="Eladó autó">
-                    <h3>Autó Típusa és Modellje</h3>
-                    <p>Évjárat: 2020 | Üzemanyag: Benzin | Típus: Manuális</p>
-                    <p><strong>Ár: 3 500 000 Ft</strong></p>
-                    <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Kapcsolat -->
-        <div class="card" id="kapcsolat">
-            <h2>Kapcsolat</h2>
-            <p>📞 <strong>Miklo Velka:</strong> <a href="tel:+38764738625" class="phone-link">+38-76-473-8625</a></p>
-            <p>📞 <strong>Roy Kawioski:</strong> <a href="tel:+38768281752" class="phone-link">+38-76-828-1752</a></p>
-        </div>
-
-        <footer>
-            &copy; 2026 RICAR KFT - Minden jog fenntartva.
-        </footer>
     </div>
+  </div>
 
+  <footer>
+    <p>&copy; 2026 RICAR KFT - Minden jog fenntartva.</p>
+  </footer>
+
+  <!-- Bejelentkezést kezelő kód -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
