@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "autok"
+    label: "Autók"
+    folder: "_autok"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    fields:
+      - {label: "Autó Márka és Modell", name: "title", widget: "string"}
+      - {label: "Évjárat", name: "evjarat", widget: "number"}
+      - {label: "Üzemanyag", name: "uzemanyag", widget: "select", options: ["Benzin", "Dízel", "Hibrid", "Elektromos"]}
+      - {label: "Váltó", name: "valto", widget: "select", options: ["Manuális", "Automata"]}
+      - {label: "Ár (Ft)", name: "ar", widget: "string"}
+      - {label: "Kép", name: "image", widget: "image"}
