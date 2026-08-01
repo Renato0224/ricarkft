@@ -264,7 +264,7 @@
                 <li><a href="#rolunk">Rólunk</a></li>
                 <li><a href="#kinalat">Kínálat</a></li>
                 <li><a href="#kapcsolat">Kapcsolat</a></li>
-                <li><a href="/admin/" class="admin-btn">Admin</a></li>
+                <li><a href="./admin/" class="admin-btn">Admin</a></li>
             </ul>
         </div>
     </nav>
@@ -356,7 +356,7 @@
             window.netlifyIdentity.on("init", user => {
                 if (!user) {
                     window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
+                        document.location.href = "./admin/";
                     });
                 }
             });
