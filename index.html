@@ -26,20 +26,82 @@
             color: var(--text-light);
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* Navigációs menü */
+        nav {
+            width: 100%;
+            background-color: #111;
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .admin-btn {
+            border: 1px solid var(--gold);
+            padding: 5px 12px;
+            border-radius: 4px;
+            color: var(--gold) !important;
+        }
+
+        .admin-btn:hover {
+            background-color: var(--gold);
+            color: #000 !important;
+        }
+
         .container {
             max-width: 1100px;
-            width: 100%;
+            width: 90%;
+            margin-top: 30px;
         }
 
         header {
             text-align: center;
-            border-bottom: 2px solid var(--gold);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
@@ -47,7 +109,7 @@
         h1 {
             color: var(--gold);
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
@@ -55,16 +117,17 @@
         .subtitle {
             color: #aaa;
             margin-top: 5px;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--gold);
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 25px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+            scroll-margin-top: 80px;
         }
 
         .card h2 {
@@ -87,7 +150,7 @@
             margin-right: auto;
         }
 
-        /* Többoszlopos, reszponzív autórács */
+        /* Reszponzív autórács */
         .car-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -123,6 +186,8 @@
             margin-top: 10px;
             text-align: center;
             transition: background 0.3s;
+            cursor: pointer;
+            border: none;
         }
 
         .btn:hover {
@@ -139,9 +204,51 @@
             text-decoration: underline;
         }
 
+        /* Modal (Részletes felugró ablak) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: var(--gold);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            margin-bottom: 15px;
+        }
+
         footer {
             text-align: center;
-            margin-top: 30px;
+            margin: 30px 0;
             color: #777;
             font-size: 0.9rem;
         }
@@ -149,21 +256,34 @@
 </head>
 <body>
 
+    <!-- Felső Menüsor -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">RICAR KFT</a>
+            <ul class="nav-links">
+                <li><a href="#rolunk">Rólunk</a></li>
+                <li><a href="#kinalat">Kínálat</a></li>
+                <li><a href="#kapcsolat">Kapcsolat</a></li>
+                <li><a href="/admin/" class="admin-btn">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <header>
             <h1>RICAR KFT</h1>
             <div class="subtitle">Minőségi Használtautó Kereskedés</div>
         </header>
 
-        <!-- Bemutatkozás -->
-        <div class="card">
+        <!-- Rólunk szekció -->
+        <div class="card" id="rolunk">
             <h2>Rólunk</h2>
             <p>Üdvözöljük a RICAR KFT oldalán! Megbízható, átvizsgált használtautók széles választékával várjuk ügyfeleinket. Célunk, hogy megtaláljuk az Ön számára a legmegfelelőbb gépjárművet.</p>
             <img src="Rolunk.png" alt="RICAR KFT Telephely" class="about-img">
         </div>
 
-        <!-- Kínálat -->
-        <div class="card">
+        <!-- Kínálat szekció -->
+        <div class="card" id="kinalat">
             <h2>Kiemelt Ajánlataink</h2>
             <div class="car-grid">
                 
@@ -175,7 +295,7 @@
                         <p>Évjárat: 2007 | Üzemanyag: Dízel | Váltó: Automata</p>
                         <p><strong>Ár: 4 990 000 Ft</strong></p>
                     </div>
-                    <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
+                    <button class="btn" onclick="openModal('Audi Q7', 'images/20260726_104409.jpg', '2007', 'Dízel', 'Automata', '4 990 000 Ft', 'Kiváló állapotban lévő Audi Q7 eladó. Rendszeresen karbantartott, friss műszaki vizsgával.')">Részletek / Kapcsolat</button>
                 </div>
 
                 <!-- 2. Autó -->
@@ -186,7 +306,7 @@
                         <p>Évjárat: 2015 | Üzemanyag: Dízel | Váltó: Automata</p>
                         <p><strong>Ár: 6 200 000 Ft</strong></p>
                     </div>
-                    <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
+                    <button class="btn" onclick="openModal('BMW 530d xDrive', 'images/20260726_104409.jpg', '2015', 'Dízel', 'Automata', '6 200 000 Ft', 'Megkímélt állapot, végig vezetett szervizkönyv, összkerékhajtás.')">Részletek / Kapcsolat</button>
                 </div>
 
                 <!-- 3. Autó -->
@@ -197,13 +317,13 @@
                         <p>Évjárat: 2013 | Üzemanyag: Dízel | Váltó: Automata</p>
                         <p><strong>Ár: 5 450 000 Ft</strong></p>
                     </div>
-                    <a href="#kapcsolat" class="btn">Érdekel / Kapcsolat</a>
+                    <button class="btn" onclick="openModal('Mercedes-Benz E220 CDI', 'images/20260726_104409.jpg', '2013', 'Dízel', 'Automata', '5 450 000 Ft', 'Kényelmes, elegáns utazóautó. Gazdaságos motorral és prémium felszereltséggel.')">Részletek / Kapcsolat</button>
                 </div>
 
             </div>
         </div>
 
-        <!-- Kapcsolat -->
+        <!-- Kapcsolat szekció -->
         <div class="card" id="kapcsolat">
             <h2>Kapcsolat</h2>
             <p>📞 <strong>Miklo Velka:</strong> <a href="tel:+38764738625" class="phone-link">+38-76-473-8625</a></p>
@@ -215,7 +335,22 @@
         </footer>
     </div>
 
-    <!-- Script a bejelentkezéshez -->
+    <!-- Részletek Modal Window -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="color: var(--gold); margin-top:0;">Autó Neve</h2>
+            <img id="modalImg" src="" alt="Autó kép" class="modal-img">
+            <p id="modalSpecs"><strong>Főbb adatok:</strong> -</p>
+            <p id="modalPrice" style="font-size: 1.2rem; color: var(--gold);"><strong>Ár:</strong> -</p>
+            <p id="modalDesc">Leírás...</p>
+            <hr style="border-color: rgba(212,175,55,0.3); margin: 15px 0;">
+            <p>Érdekel az autó? Hívj minket bizalommal!</p>
+            <a href="tel:+38764738625" class="btn" style="display:block; width: fit-content;">📞 Miklo Velka Hívása</a>
+        </div>
+    </div>
+
+    <!-- Script a Bejelentkezéshez és a Modalhoz -->
     <script>
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
@@ -225,6 +360,28 @@
                     });
                 }
             });
+        }
+
+        // Modal funkciók
+        function openModal(title, img, year, fuel, trans, price, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalImg').src = img;
+            document.getElementById('modalSpecs').innerHTML = `<strong>Évjárat:</strong> ${year} | <strong>Üzemanyag:</strong> ${fuel} | <strong>Váltó:</strong> ${trans}`;
+            document.getElementById('modalPrice').innerHTML = `<strong>Ár:</strong> ${price}`;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('carModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('carModal').style.display = 'none';
+        }
+
+        // Ablak mellé kattintásra is zárja be a modalt
+        window.onclick = function(event) {
+            const modal = document.getElementById('carModal');
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
